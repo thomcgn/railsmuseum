@@ -9,7 +9,7 @@ class CreateDrinksDrinks < ActiveRecord::Migration[7.0]
 
       t.timestamps
 
-      add_foreign_key :drinks_drinks, :drinks_categories, column: :category
+
     end
   end
 end

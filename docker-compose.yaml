@@ -1,16 +1,23 @@
-version: "3.9"
+version: '3'
 services:
-  app:
-    image: rubyapp
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_HOST: db
-    ports:
-      - 3000:3000
   db:
-    image: postgres:alpine3.17
+    image: postgres:latest
     environment:
-      POSTGRES_PASSWORD: password
+      - POSTGRES_PASSWORD=password
     ports:
       - "5432:5432"
+    volumes:
+      - "dbdata:/var/lib/postgresql/data"
+
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgres://postgres:password@db:5432/postgres
+    volumes:
+      - .:/app
+volumes:
+  dbdata:

@@ -1,5 +1,5 @@
-FROM ruby:alpine3.17
-RUN apk add \
+FROM ruby:alpine
+RUN apk add --update \
     build-base \
     postgresql-dev \
     tzdata \
